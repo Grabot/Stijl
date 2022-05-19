@@ -1,5 +1,6 @@
 import math
 
+from objects.plane import Plane
 from util.colours import colours
 
 
@@ -10,7 +11,6 @@ def background_square(_yertle, _rand, _width, _height, _index):
     # [width/2, height/2]
     # [-width/2, height/2]
     # The square behind this square on it side will have the following points:
-
     side_triangle = _height/math.sqrt(2)
     point_a = math.pow(side_triangle, 2) - math.pow(_height/2, 2)
     point_a = math.sqrt(point_a)
@@ -33,6 +33,13 @@ def background_square(_yertle, _rand, _width, _height, _index):
     print("colour_index: %s" % colour_index)
     _index += 1
 
+    background_points = [
+        left_point,
+        top_point,
+        right_point,
+        bottom_point
+    ]
+    background_plane = Plane(background_points)
     _yertle.penup()
     _yertle.goto(left_point[0], left_point[1])
     _yertle.pendown()
@@ -44,11 +51,12 @@ def background_square(_yertle, _rand, _width, _height, _index):
     _yertle.goto(left_point[0], left_point[1])
     _yertle.end_fill()
 
-    colour_index = _rand.randint(_index, len(colours) + _index)
-    colour_index -= _index
-    _index += 1
-    _yertle.fillcolor(colours[colour_index][1])
+    return background_plane
 
+    # colour_index = _rand.randint(_index, len(colours) + _index)
+    # colour_index -= _index
+    # _index += 1
+    # _yertle.fillcolor(colours[colour_index][1])
     # This is the final canvas size
     # left_bottom = [-(_width/2), -(_height/2)]
     # right_bottom = [(_width/2), -(_height/2)]

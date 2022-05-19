@@ -2,6 +2,7 @@ import turtle
 from turtle import Screen
 import random
 
+from util.add_square import add_square
 from util.background_square import background_square
 
 
@@ -23,14 +24,16 @@ if __name__ == '__main__':
     yertle = turtle.Turtle(visible=True)
     yertle.speed(10)
 
+    planes = []
     # Add an index so that we can pick new colours from the same list using the same seed and get a new one every time.
     index = 0
-    background_square(yertle, random, width, height, index)
+    background_plane = background_square(yertle, random, width, height, index)
     index += 1
+    planes.append(background_plane)
 
     triangle_numbers = random.randint(0, 20)
 
-    # add_random_plane(yertle, random, width, height, index)
+    add_square(yertle, random, width, height, planes, index)
     # for t in range(0, triangle_numbers):
     #     add_random_triangle(random, width, height)
     index += triangle_numbers
