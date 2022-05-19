@@ -5,6 +5,7 @@ import numpy
 import math
 
 from objects.line import Line
+from objects.plane import Plane
 
 colours = [
     ['maroon', '#800000', (128, 0, 0)],
@@ -149,34 +150,98 @@ colours = [
 ]
 
 
-def background_square(_t, _rand, _width, _height, _index):
+def background_square(_yertle, _rand, _width, _height, _index):
+    # We will draw a larger square on it's side. The points of the square are:
+    # [-width/2, -height/2]
+    # [width/2, -height/2]
+    # [width/2, height/2]
+    # [-width/2, height/2]
+    # The square behind this square on it side will have the following points:
+
+    side_triangle = _height/math.sqrt(2)
+    point_a = math.pow(side_triangle, 2) - math.pow(_height/2, 2)
+    point_a = math.sqrt(point_a)
+    point_a = -(_width/2) - point_a
+    left_point = [point_a, 0]
+    point_c = point_a * -1
+    right_point = [point_c, 0]
+    side_triangle_2 = _width / math.sqrt(2)
+    point_b = math.pow(side_triangle_2, 2) - math.pow(_width/2, 2)
+    point_b = math.sqrt(point_b)
+    point_b = -(_height/2) - point_b
+    bottom_point = [0, point_b]
+    point_d = point_b * -1
+    top_point = [0, point_d]
+    print("point b")
+
     colour_index = _rand.randint(_index, len(colours) + _index)
     colour_index -= _index
-    _t.fillcolor(colours[colour_index][1])
+    _yertle.fillcolor(colours[colour_index][1])
+    print("colour_index: %s" % colour_index)
+    _index += 1
 
-    plane_points = [[0, 0], [0, _height], [_width, _height], [_width, 0]]
-    line1 = Line([0, 0], [0, _height])
-    line2 = Line([0, _height], [_width, _height])
-    line3 = Line([_width, _height], [_width, 0])
-    line4 = Line([_width, 0], [0, 0])
+    _yertle.penup()
+    _yertle.goto(left_point[0], left_point[1])
+    _yertle.pendown()
 
-    _t.penup()
-    _t.goto(line1.start[0], line1.start[1])
-    _t.pendown()
+    _yertle.begin_fill()
+    _yertle.goto(top_point[0], top_point[1])
+    _yertle.goto(right_point[0], right_point[1])
+    _yertle.goto(bottom_point[0], bottom_point[1])
+    _yertle.goto(left_point[0], left_point[1])
+    _yertle.end_fill()
 
-    _t.begin_fill()
-    _t.goto(line1.end[0], line1.end[1])
-    _t.goto(line2.end[0], line2.end[1])
-    _t.goto(line3.end[0], line3.end[1])
-    _t.goto(line4.end[0], line4.end[1])
-    _t.end_fill()
+    colour_index = _rand.randint(_index, len(colours) + _index)
+    colour_index -= _index
+    _index += 1
+    _yertle.fillcolor(colours[colour_index][1])
+
+    # This is the final canvas size
+    # left_bottom = [-(_width/2), -(_height/2)]
+    # right_bottom = [(_width/2), -(_height/2)]
+    # right_top = [(_width/2), (_height/2)]
+    # left_top = [-(_width/2), (_height/2)]
+    # plane_points = [
+    #     [-(_width/2), -(_height/2)],
+    #     [(_width/2), -(_height/2)],
+    #     [(_width/2), (_height/2)],
+    #     [-(_width/2), (_height/2)]]
+    # background_plane = Plane(plane_points)
+    # line1 = Line(left_bottom, right_bottom)
+    # line2 = Line(right_bottom, right_top)
+    # line3 = Line(right_top, left_top)
+    # line4 = Line(left_top, left_bottom)
+    #
+    # _yertle.penup()
+    # _yertle.goto(line1.start[0], line1.start[1])
+    # _yertle.pendown()
+    #
+    # _yertle.begin_fill()
+    # _yertle.goto(line1.end[0], line1.end[1])
+    # _yertle.goto(line2.end[0], line2.end[1])
+    # _yertle.goto(line3.end[0], line3.end[1])
+    # _yertle.goto(line4.end[0], line4.end[1])
+    # _yertle.end_fill()
+    #
+    # # go to [0.0, 0.0]
+    # _yertle.penup()
+    # _yertle.goto(line1.start[0], line1.start[1])
+    # _yertle.pendown()
 
 
-def add_random_triangle(_t, _rand, _width, _height, _index):
+def add_first_line(_yertle, _rand, _width, _height, _index):
+    print("adding first line")
+    colour_index = _rand.randint(_index, len(colours) + _index)
+    colour_index -= _index
+    _index += 1
+    _yertle.fillcolor(colours[colour_index][1])
+
+
+def add_random_plane(_yertle, _rand, _width, _height, _index):
     print("add triangle")
     colour_index = _rand.randint(_index, len(colours) + _index)
     colour_index -= _index
-    _t.fillcolor(colours[colour_index][1])
+    _yertle.fillcolor(colours[colour_index][1])
     print("colour_index: %s" % colour_index)
     _index += 1
 
@@ -187,22 +252,27 @@ if __name__ == '__main__':
     width = 800
     height = 600
     screen = Screen()
-    screen.setup(width+5, height+5)
-    screen.setworldcoordinates(0, 0, width+5, height+5)
+    if width > height:
+        screen.setup(width*2, width*2, startx=200, starty=200)
+        screen.setworldcoordinates(-width, -width, width + 5, width + 5)
+    else:
+        screen.setup(height * 2, height * 2, startx=200, starty=200)
+        screen.setworldcoordinates(-height, -height, height + 5, height + 5)
     # screen.tracer(False)
 
     turtle.hideturtle()
-    t = turtle.Turtle(visible=False)
-    t.speed(1)
+    yertle = turtle.Turtle(visible=True)
+    yertle.speed(10)
 
     # Add an index so that we can pick new colours from the same list using the same seed and get a new one every time.
     index = 0
-    background_square(t, random, width, height, index)
+    background_square(yertle, random, width, height, index)
     index += 1
 
     triangle_numbers = random.randint(0, 20)
 
-    add_random_triangle(t, random, width, height, index)
+    add_first_line(yertle, random, width, height, index)
+    # add_random_plane(yertle, random, width, height, index)
     # for t in range(0, triangle_numbers):
     #     add_random_triangle(random, width, height)
     index += triangle_numbers
