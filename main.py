@@ -7,7 +7,7 @@ from util.background_square import background_square
 
 
 if __name__ == '__main__':
-    random.seed("test2")
+    random.seed("test6")
     
     width = 800
     height = 600
@@ -22,7 +22,7 @@ if __name__ == '__main__':
 
     turtle.hideturtle()
     yertle = turtle.Turtle(visible=True)
-    yertle.speed(5)
+    yertle.speed(7)
 
     planes = []
     # Add an index so that we can pick new colours from the same list using the same seed and get a new one every time.
@@ -33,10 +33,13 @@ if __name__ == '__main__':
 
     triangle_numbers = random.randint(0, 20)
 
-    plane_1, plane_2 = add_square(yertle, random, width, height, planes, index)
+    for x in range(0, 20):
+        plane_1, plane_2, chosen_plane = add_square(yertle, random, width, height, planes, index)
+        del planes[chosen_plane]
+        planes.append(plane_1)
+        planes.append(plane_2)
     # for t in range(0, triangle_numbers):
     #     add_random_triangle(random, width, height)
-    index += triangle_numbers
     print(triangle_numbers)
 
     turtle.Screen().exitonclick()

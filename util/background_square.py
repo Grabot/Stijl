@@ -30,6 +30,7 @@ def background_square(_yertle, _rand, _width, _height, _index):
     colour_index = _rand.randint(_index, len(colours) + _index)
     colour_index -= _index
     _yertle.fillcolor(colours[colour_index][1])
+    del colours[colour_index]
     print("colour_index: %s" % colour_index)
     _index += 1
 
