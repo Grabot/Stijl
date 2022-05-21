@@ -1,5 +1,37 @@
 
 
+# These are the secondary and tertiary colours of CYMK
+# colours = [
+#     ['blue', '#0000ff', (0, 0, 255)],
+#     ['green', '#00ff00', (0, 255, 0)],
+#     ['red', '#ff0000', (255, 0, 0)],
+#     ['chartreuse', '#80ff00', (128, 255, 0)],
+#     ['spring green', '#00ff80', (0, 255, 128)],
+#     ['azure', '#0080ff',  (0, 128, 255)],
+#     ['violet', '#8000ff', (128, 0, 255)],
+#     ['rose', '#ff0080', (255, 0, 128)],
+#     ['orange', '#ff8000', (255, 128, 0)],
+#     ['grey', '#808080', (128, 128, 128)]
+# ]
+
+# # The primary colours of RGB (secondary colours of CYMK)
+# colours = [
+#     ['blue', '#0000ff', (0, 0, 255)],
+#     ['green', '#00ff00', (0, 255, 0)],
+#     ['red', '#ff0000', (255, 0, 0)],
+#     ['white', '#FFFFFF', (255, 255, 255)],
+#     ['black', '#000000', (0, 0, 0)],
+# ]
+
+# # The primary colours of CYMK
+# colours = [
+#     ['cyan', '#00ffff', (0, 255, 255)],
+#     ['megenta', '#FF00FF', (255, 0, 255)],
+#     ['yellow', '#FFFF00', (255, 255, 0)],
+#     ['white', '#FFFFFF', (255, 255, 255)],
+#     ['black', '#000000', (0, 0, 0)],
+# ]
+
 colours = [
     ['maroon', '#800000', (128, 0, 0)],
     ['dark red', '#8B0000', (139, 0, 0)],

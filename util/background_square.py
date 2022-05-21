@@ -26,12 +26,10 @@ def background_square(_yertle, _rand, _width, _height, _index):
     bottom_point = [0, point_b]
     point_d = point_b * -1
     top_point = [0, point_d]
-    print("point b")
 
     colour_index = _rand.randint(_index, len(colours) + _index)
     colour_index -= _index
     _yertle.fillcolor(colours[colour_index][1])
-    del colours[colour_index]
     print("colour_index: %s" % colour_index)
     _index += 1
 
@@ -107,7 +105,6 @@ def hide_canvas_sides(_yertle, _width, _height):
     bottom_point = [0, point_b]
     point_d = point_b * -1
     top_point = [0, point_d]
-    print("point b")
     _yertle.fillcolor('#FFFFFF')
 
     canvas_point_bl = [-_width/2, -_height/2]

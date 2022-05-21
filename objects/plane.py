@@ -21,6 +21,9 @@ class Plane:
             line4
         ]
 
+    def get_all_lines(self):
+        return self.lines
+
     def get_line(self, line_choice):
         return self.lines[line_choice]
 
