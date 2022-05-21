@@ -7,7 +7,7 @@ from util.background_square import background_square
 
 
 if __name__ == '__main__':
-    random.seed("test6")
+    random.seed("Sander Kools")
     
     width = 800
     height = 600
@@ -31,9 +31,9 @@ if __name__ == '__main__':
     index += 1
     planes.append(background_plane)
 
-    triangle_numbers = random.randint(0, 20)
+    triangle_numbers = random.randint(0, 40)
 
-    for x in range(0, 20):
+    for x in range(0, triangle_numbers):
         plane_1, plane_2, chosen_plane = add_square(yertle, random, width, height, planes, index)
         del planes[chosen_plane]
         planes.append(plane_1)

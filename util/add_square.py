@@ -84,10 +84,15 @@ def add_square(_yertle, _rand, _width, _height, _planes, _index):
         line_choice -= _index
         _index += 1
         line = plane.get_line(line_choice)
+        # We give the line a minimum length, to make it easier with painting and visibly
+        min_line_length = 100
+        # It's possible that a line is shorter than the minimum length because of the angles, don't pick these
+        if line.get_length() <= min_line_length:
+            continue
         next_line = line.get_next()
         # We are going to split the chosen line somewhere
         # and attempt to calculate the new resulting plane split using the chosen angle
-        line_length_choice = _rand.uniform(_index, line.get_length() + _index)
+        line_length_choice = _rand.uniform(_index + min_line_length, line.get_length() + _index)
         line_length_choice -= _index
         _index += 1
 
