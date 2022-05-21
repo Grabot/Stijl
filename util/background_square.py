@@ -2,6 +2,7 @@ import math
 
 from objects.plane import Plane
 from util.colours import colours
+from util.draw_plane import draw_plane
 
 
 def background_square(_yertle, _rand, _width, _height, _index):
@@ -89,4 +90,52 @@ def background_square(_yertle, _rand, _width, _height, _index):
     # _yertle.penup()
     # _yertle.goto(line1.start[0], line1.start[1])
     # _yertle.pendown()
+
+
+def hide_canvas_sides(_yertle, _width, _height):
+    side_triangle = _height/math.sqrt(2)
+    point_a = math.pow(side_triangle, 2) - math.pow(_height/2, 2)
+    point_a = math.sqrt(point_a)
+    point_a = -(_width/2) - point_a
+    left_point = [point_a, 0]
+    point_c = point_a * -1
+    right_point = [point_c, 0]
+    side_triangle_2 = _width / math.sqrt(2)
+    point_b = math.pow(side_triangle_2, 2) - math.pow(_width/2, 2)
+    point_b = math.sqrt(point_b)
+    point_b = -(_height/2) - point_b
+    bottom_point = [0, point_b]
+    point_d = point_b * -1
+    top_point = [0, point_d]
+    print("point b")
+    _yertle.fillcolor('#FFFFFF')
+
+    canvas_point_bl = [-_width/2, -_height/2]
+    canvas_point_br = [_width/2, -_height/2]
+    canvas_point_tl = [-_width/2, _height/2]
+    canvas_point_tr = [_width/2, _height/2]
+    left_triangle = [
+        canvas_point_bl,
+        canvas_point_tl,
+        left_point
+    ]
+    right_triangle = [
+        canvas_point_br,
+        canvas_point_tr,
+        right_point
+    ]
+    top_triangle = [
+        canvas_point_tl,
+        canvas_point_tr,
+        top_point
+    ]
+    bottom_triangle = [
+        canvas_point_bl,
+        canvas_point_br,
+        bottom_point
+    ]
+    draw_plane(_yertle, left_triangle)
+    draw_plane(_yertle, right_triangle)
+    draw_plane(_yertle, top_triangle)
+    draw_plane(_yertle, bottom_triangle)
 

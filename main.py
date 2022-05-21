@@ -3,8 +3,7 @@ from turtle import Screen
 import random
 
 from util.add_square import add_square
-from util.background_square import background_square
-
+from util.background_square import background_square, hide_canvas_sides
 
 if __name__ == '__main__':
     random.seed("Sander Kools")
@@ -22,7 +21,7 @@ if __name__ == '__main__':
 
     turtle.hideturtle()
     yertle = turtle.Turtle(visible=True)
-    yertle.speed(7)
+    yertle.speed(10)
 
     planes = []
     # Add an index so that we can pick new colours from the same list using the same seed and get a new one every time.
@@ -41,6 +40,7 @@ if __name__ == '__main__':
     # for t in range(0, triangle_numbers):
     #     add_random_triangle(random, width, height)
     print(triangle_numbers)
+    background_plane = hide_canvas_sides(yertle, width, height)
 
     turtle.Screen().exitonclick()
 
