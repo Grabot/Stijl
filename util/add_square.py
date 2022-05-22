@@ -213,8 +213,8 @@ def add_square(_yertle, _rand, _width, _height, _planes, _index):
             test_point_c_2,
             change_line.end
         ]
-        plane_1 = Plane(new_plane_1_points)
-        plane_2 = Plane(new_plane_2_points)
+        plane_1 = Plane(new_plane_1_points, colours[colour_index][1])
+        plane_2 = Plane(new_plane_2_points, plane.get_colour())
         # Check if all the new angles are NOT nice, so not 90
         new_plane_1_ang_1 = get_angle_lines(plane_1.get_line(0), plane_1.get_line(1))
 

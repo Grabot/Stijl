@@ -3,7 +3,7 @@ from objects.line import Line
 
 class Plane:
 
-    def __init__(self, points):
+    def __init__(self, points, colour):
         self.points = points
         # The plane will always be a rectangle with 4 lines
         line1 = Line(points[0], points[1])
@@ -20,10 +20,17 @@ class Plane:
             line3,
             line4
         ]
+        self.colour = colour
 
     def get_all_lines(self):
         return self.lines
 
     def get_line(self, line_choice):
         return self.lines[line_choice]
+
+    def set_colour(self, colour):
+        self.colour = colour
+
+    def get_colour(self):
+        return self.colour
 

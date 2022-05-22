@@ -39,7 +39,7 @@ def background_square(_yertle, _rand, _width, _height, _index):
         right_point,
         bottom_point
     ]
-    background_plane = Plane(background_points)
+    background_plane = Plane(background_points, colours[colour_index][1])
     _yertle.penup()
     _yertle.goto(left_point[0], left_point[1])
     _yertle.pendown()

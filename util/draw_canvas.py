@@ -4,6 +4,63 @@ from objects.line import Line
 from util.draw_plane import draw_plane
 
 
+def draw_squares(_yertle, _planes, _width, _height, _canvas_lines, _seed, draw_everything):
+    plane_index = 1
+    _yertle.hideturtle()
+    f = None
+    if not draw_everything:
+        f = open("results/%s/%s" % (_seed, "plane_info.txt"), "w")
+    for plane in _planes:
+        intersection_points = []
+        for square_line in plane.get_all_lines():
+            for canvas_line in _canvas_lines:
+                intersection = line_intersection(square_line, canvas_line)
+                if intersection:
+                    inter_x = intersection[0]
+                    inter_y = intersection[1]
+                    intersection_points.append([inter_x, inter_y])
+        # We found all the intersection points, now we will find all the points that are within the canvas
+        for square_line in plane.get_all_lines():
+            if is_inside_canvas(_width, _height, square_line.start):
+                intersection_points.append(square_line.start)
+
+        if len(intersection_points) != 0:
+            if not draw_everything:
+                _yertle.clear()
+                _yertle.hideturtle()
+            sorted_points = convex_hull(intersection_points)
+            _yertle.fillcolor(plane.get_colour())
+            draw_plane(_yertle, sorted_points)
+
+            if not draw_everything:
+                ts = _yertle.getscreen()
+                plane_name = 'plane_%s' % plane_index
+                ts.getcanvas().postscript(file="results/%s/%s" % (_seed, plane_name + ".eps"))
+                # Write information about the plane to a file
+                f.write(plane_name + ":\n")
+                point_index = 1
+                for point in intersection_points:
+                    # We will convert the points from having the origin in [0, 0]
+                    # to have the origin in [width/2, height/2].
+                    # This makes the bottom left point [0, 0]
+                    # It makes it easier when converting it to the canvas with paint
+                    x_point = "%.2f" % (point[0] + _width/2)
+                    y_point = "%.2f" % (point[1] + _height/2)
+
+                    f.write("point_%s:" % point_index)
+                    f.write("x: %s " % x_point)
+                    f.write("y: %s\n" % y_point)
+                f.write("colour: %s" % plane.get_colour())
+                f.write("\n\n")
+
+            plane_index += 1
+    if not draw_everything and f:
+        f.close()
+    else:
+        ts = _yertle.getscreen()
+        ts.getcanvas().postscript(file="results/%s/%s" % (_seed, "final_image.eps"))
+
+
 def line_intersection(line_1, line_2):
     # https://gist.github.com/kylemcdonald/6132fc1c29fd3767691442ba4bc84018
     x1, y1 = line_1.start
@@ -50,7 +107,7 @@ def orientation(p, q, r):
         return 2
 
 
-def convex_hull(points, _width):
+def convex_hull(points):
     # https://www.geeksforgeeks.org/convex-hull-set-1-jarviss-algorithm-or-wrapping/
     n = len(points)
     if n < 3:
@@ -81,10 +138,11 @@ def convex_hull(points, _width):
     return hull
 
 
-def draw_canvas(_yertle, _width, _height, _planes):
+def draw_canvas(_yertle, _width, _height, _planes, _seed):
     print("drawing canvas")
     # First clear the canvas and start over (debug purpose)
     _yertle.clear()
+    _yertle.hideturtle()
     # We will use the canvas line segments to identify where they intersect with the planes
     canvas_left = Line([-_width / 2, -_height / 2], [-_width / 2, _height / 2])
     canvas_top = Line([-_width / 2, _height / 2], [_width / 2, _height / 2])
@@ -97,7 +155,6 @@ def draw_canvas(_yertle, _width, _height, _planes):
         canvas_bottom
     ]
 
-    _yertle.speed(5)
     _yertle.fillcolor('#FFFFFF')
     draw_plane(_yertle, [
         canvas_left.start,
@@ -105,23 +162,7 @@ def draw_canvas(_yertle, _width, _height, _planes):
         canvas_right.start,
         canvas_bottom.start
     ])
-    _yertle.fillcolor('#000000')
-    for plane in _planes:
-        intersection_points = []
-        for square_line in plane.get_all_lines():
-            for canvas_line in canvas_lines:
-                intersection = line_intersection(square_line, canvas_line)
-                if intersection:
-                    inter_x = intersection[0]
-                    inter_y = intersection[1]
-                    intersection_points.append([inter_x, inter_y])
-        # We found all the intersection points, now we will find all the points that are within the canvas
-        for square_line in plane.get_all_lines():
-            if is_inside_canvas(_width, _height, square_line.start):
-                intersection_points.append(square_line.start)
 
-        if len(intersection_points) != 0:
-            # We have some plane that we should draw!
-            sorted_points = convex_hull(intersection_points, _width)
-            draw_plane(_yertle, sorted_points)
-        print("intersected at: %s" % intersection_points)
+    draw_squares(_yertle, _planes, _width, _height, canvas_lines, _seed, False)
+    draw_squares(_yertle, _planes, _width, _height, canvas_lines, _seed, True)
+
