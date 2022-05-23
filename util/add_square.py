@@ -4,6 +4,7 @@ from objects.line import Line
 from objects.plane import Plane
 from util.colours import colours
 from util.draw_plane import draw_plane
+from util.variables import min_line_length
 
 
 def get_angle_lines(line_1, line_2):
@@ -63,8 +64,15 @@ def point_on_plane(_plane, _point):
         return False
 
 
+def get_length(start_point, end_point):
+    x_length = abs(start_point[0] - end_point[0])
+    y_length = abs(start_point[1] - end_point[1])
+    return math.sqrt(math.pow(x_length, 2) + math.pow(y_length, 2))
+
+
 def add_square(_yertle, _rand, _width, _height, _planes, _index):
-    angles = [86, 87, 88, 89, 91, 92, 93, 94]
+    # angles = [86, 87, 88, 89, 91, 92, 93, 94]
+    angles = [88, 89, 91, 92]
     while True:
         colour_index = _rand.randint(_index, len(colours) - 1 + _index)
         colour_index -= _index
@@ -81,8 +89,6 @@ def add_square(_yertle, _rand, _width, _height, _planes, _index):
         line_choice -= _index
         _index += 1
         line = plane.get_line(line_choice)
-        # We give the line a minimum length, to make it easier with painting and visibly
-        min_line_length = 100
         # It's possible that a line is shorter than the minimum length because of the angles, don't pick these
         if line.get_length() <= min_line_length:
             continue
@@ -213,11 +219,29 @@ def add_square(_yertle, _rand, _width, _height, _planes, _index):
             test_point_c_2,
             change_line.end
         ]
+
+        # Not sure why the min line length wasn't captured before but this seems to work too.
+        length_1 = get_length(new_plane_1_points[0], new_plane_1_points[1])
+        length_2 = get_length(new_plane_1_points[1], new_plane_1_points[2])
+        length_3 = get_length(new_plane_1_points[2], new_plane_1_points[3])
+        length_4 = get_length(new_plane_1_points[3], new_plane_1_points[0])
+        length_5 = get_length(new_plane_2_points[0], new_plane_2_points[1])
+        length_6 = get_length(new_plane_2_points[1], new_plane_2_points[2])
+        length_7 = get_length(new_plane_2_points[2], new_plane_2_points[3])
+        length_8 = get_length(new_plane_2_points[3], new_plane_2_points[0])
+        if length_1 <= min_line_length or \
+                length_2 <= min_line_length or \
+                length_3 <= min_line_length or \
+                length_4 <= min_line_length or \
+                length_5 <= min_line_length or \
+                length_6 <= min_line_length or \
+                length_7 <= min_line_length or \
+                length_8 <= min_line_length:
+            continue
         plane_1 = Plane(new_plane_1_points, colours[colour_index][1])
         plane_2 = Plane(new_plane_2_points, plane.get_colour())
-        # Check if all the new angles are NOT nice, so not 90
-        new_plane_1_ang_1 = get_angle_lines(plane_1.get_line(0), plane_1.get_line(1))
 
+        # Check if all the new angles are NOT nice, so not 90
         # Damn floating points :(
         if abs(angle_c_1 - 90) < 0.001:
             continue
