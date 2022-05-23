@@ -5,18 +5,16 @@ import os
 from util.add_square import add_square
 from util.background_square import background_square, hide_canvas_sides
 from util.draw_canvas import draw_canvas
-from util.variables import width, height, min_squares, max_squares
+from util.variables import width, height, min_squares, max_squares, seed
 
 if __name__ == '__main__':
-    # seed = "test7"
-    seed = "Sander Kools"
     random.seed(seed)
 
     yertle = turtle.Turtle(visible=False)
     yertle.hideturtle()
 
     screen = Screen()
-    view_algorithm = True
+    view_algorithm = False
     start_x = 0
     start_y = 0
     if view_algorithm:
@@ -61,7 +59,7 @@ if __name__ == '__main__':
     # I think now we'll start over and redraw the planes in their final position with the canvas
     # This way we can identify the coordinates
     yertle.speed(10)
-    draw_canvas(yertle, width, height, planes, seed)
+    draw_canvas(yertle, width, height, planes)
 
     turtle.Screen().exitonclick()
 

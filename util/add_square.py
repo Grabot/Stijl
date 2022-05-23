@@ -4,7 +4,7 @@ from objects.line import Line
 from objects.plane import Plane
 from util.colours import colours
 from util.draw_plane import draw_plane
-from util.variables import min_line_length
+from util.variables import min_line_length, angles
 
 
 def get_angle_lines(line_1, line_2):
@@ -71,9 +71,7 @@ def get_length(start_point, end_point):
 
 
 def add_square(_yertle, _rand, _width, _height, _planes, _index):
-    # angles = [86, 87, 88, 89, 91, 92, 93, 94]
-    # angles = [88, 89, 91, 92]
-    angles = [69]
+
     while True:
         colour_index = _rand.randint(_index, len(colours) - 1 + _index)
         colour_index -= _index

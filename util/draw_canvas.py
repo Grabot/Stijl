@@ -2,14 +2,15 @@ import math
 
 from objects.line import Line
 from util.draw_plane import draw_plane
+from util.variables import seed
 
 
-def draw_squares(_yertle, _planes, _width, _height, _canvas_lines, _seed, draw_everything):
+def draw_squares(_yertle, _planes, _width, _height, _canvas_lines, draw_everything):
     plane_index = 1
     _yertle.hideturtle()
     f = None
     if not draw_everything:
-        f = open("results/%s/%s" % (_seed, "plane_info.txt"), "w")
+        f = open("results/%s/%s" % (seed, "plane_info.txt"), "w")
     for plane in _planes:
         intersection_points = []
         for square_line in plane.get_all_lines():
@@ -35,7 +36,7 @@ def draw_squares(_yertle, _planes, _width, _height, _canvas_lines, _seed, draw_e
             if not draw_everything:
                 ts = _yertle.getscreen()
                 plane_name = 'plane_%s' % plane_index
-                ts.getcanvas().postscript(file="results/%s/%s" % (_seed, plane_name + ".eps"))
+                ts.getcanvas().postscript(file="results/%s/%s" % (seed, plane_name + ".eps"))
                 # Write information about the plane to a file
                 f.write(plane_name + ":\n")
                 point_index = 1
@@ -58,7 +59,7 @@ def draw_squares(_yertle, _planes, _width, _height, _canvas_lines, _seed, draw_e
         f.close()
     else:
         ts = _yertle.getscreen()
-        ts.getcanvas().postscript(file="results/%s/%s" % (_seed, "final_image.eps"))
+        ts.getcanvas().postscript(file="results/%s/%s" % (seed, "final_image.eps"))
 
 
 def line_intersection(line_1, line_2):
@@ -138,7 +139,7 @@ def convex_hull(points):
     return hull
 
 
-def draw_canvas(_yertle, _width, _height, _planes, _seed):
+def draw_canvas(_yertle, _width, _height, _planes):
     print("drawing canvas")
     # First clear the canvas and start over (debug purpose)
     _yertle.clear()
@@ -163,6 +164,6 @@ def draw_canvas(_yertle, _width, _height, _planes, _seed):
         canvas_bottom.start
     ])
 
-    draw_squares(_yertle, _planes, _width, _height, canvas_lines, _seed, False)
-    draw_squares(_yertle, _planes, _width, _height, canvas_lines, _seed, True)
+    draw_squares(_yertle, _planes, _width, _height, canvas_lines, False)
+    draw_squares(_yertle, _planes, _width, _height, canvas_lines, True)
 
