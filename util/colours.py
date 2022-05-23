@@ -33,31 +33,40 @@
 # ]
 
 # secondary and tertiary colours from a colour mixing tool
-colours = [
-    # ['Malibu', '#8080FF'],
-    # ['Mint Green', '#80FF80'],
-    # ['Vivid Tangerine', '#FF8080'],
-    ['Malibu 2', '#55AAFF'],
-    ['Heliotrope', '#AA55FF'],
-    ['Aquamarine', '#55FFAA'],
-    ['Green Yellow', '#AAFF55'],
-    ['Heliotrope', '#AA55FF'],
-    ['Hot Pink', '#FF55AA'],
-    ['Texas Rose', '#FFAA55'],
-    ['Emperor', '#555555'],
-    ['Silver Chalice', '#AAAAAA'],
-]
-
 # colours = [
-#     ["420", "#420420"],
-#     ["blue", "#000420"],
-#     ["red", "#ff0420"],
-#     ["red", "#ff0420"],
-#     ["yellow", "#fff420"],
-#     ["green", "#0ff420"],
-#     ['white', '#FFFFFF'],
-#     ['black', '#000000']
+#     # ['Malibu', '#8080FF'],
+#     # ['Mint Green', '#80FF80'],
+#     # ['Vivid Tangerine', '#FF8080'],
+#     ['Malibu 2', '#55AAFF'],
+#     ['Heliotrope', '#AA55FF'],
+#     ['Aquamarine', '#55FFAA'],
+#     ['Green Yellow', '#AAFF55'],
+#     ['Heliotrope', '#AA55FF'],
+#     ['Hot Pink', '#FF55AA'],
+#     ['Texas Rose', '#FFAA55'],
+#     ['Emperor', '#555555'],
+#     ['Silver Chalice', '#AAAAAA'],
 # ]
+
+colours = [
+    ["420", "#420420"],
+    ["blue", "#000420"],
+    ["red1", "#f00420"],
+    ["red2", "#ff0420"],
+    ["yellow", "#fff420"],
+    ["green", "#0ff420"],
+    ["dark", "#0f0420"],
+    ["green1", "#00f420"],
+    ["brown", "#420000"],
+    ["brown2", "#420f00"],
+    ["blue1", "#420ff0"],
+    ["blue2", "#420fff"],
+    ["blue3", "#4200ff"],
+    ["blue4", "#4200f0"],
+    ["brown3", "#42000f"],
+    ['white', '#FFFFFF'],
+    ['black', '#000000']
+]
 
 # colours = [
 #     ['maroon', '#800000'],
