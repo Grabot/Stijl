@@ -73,6 +73,7 @@ def get_length(start_point, end_point):
 def add_square(_yertle, _rand, _width, _height, _planes, _index):
     # angles = [86, 87, 88, 89, 91, 92, 93, 94]
     angles = [88, 89, 91, 92]
+    # angles = [69]
     while True:
         colour_index = _rand.randint(_index, len(colours) - 1 + _index)
         colour_index -= _index

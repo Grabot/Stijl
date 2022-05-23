@@ -49,6 +49,17 @@ colours = [
 ]
 
 # colours = [
+#     ["420", "#420420"],
+#     ["blue", "#000420"],
+#     ["red", "#ff0420"],
+#     ["red", "#ff0420"],
+#     ["yellow", "#fff420"],
+#     ["green", "#0ff420"],
+#     ['white', '#FFFFFF'],
+#     ['black', '#000000']
+# ]
+
+# colours = [
 #     ['maroon', '#800000'],
 #     ['dark red', '#8B0000'],
 #     ['brown', '#A52A2A'],
