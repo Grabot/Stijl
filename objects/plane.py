@@ -2,7 +2,6 @@ from objects.line import Line
 
 
 class Plane:
-
     def __init__(self, points, colour):
         self.points = points
         # The plane will always be a rectangle with 4 lines
@@ -14,12 +13,7 @@ class Plane:
         line2.set_next(line3)
         line3.set_next(line4)
         line4.set_next(line1)
-        self.lines = [
-            line1,
-            line2,
-            line3,
-            line4
-        ]
+        self.lines = [line1, line2, line3, line4]
         self.colour = colour
 
     def get_all_lines(self):
@@ -33,4 +27,3 @@ class Plane:
 
     def get_colour(self):
         return self.colour
-

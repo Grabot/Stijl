@@ -1,5 +1,3 @@
-
-
 def draw_plane(_yertle, _points):
 
     _yertle.penup()

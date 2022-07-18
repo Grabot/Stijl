@@ -1,5 +1,3 @@
-
-
 # These are the secondary and tertiary colours of CYMK
 # colours = [
 #     ['blue', '#0000ff'],
@@ -37,15 +35,15 @@ colours = [
     # ['Malibu', '#8080FF'],
     # ['Mint Green', '#80FF80'],
     # ['Vivid Tangerine', '#FF8080'],
-    ['Malibu 2', '#55AAFF'],
-    ['Heliotrope', '#AA55FF'],
-    ['Aquamarine', '#55FFAA'],
-    ['Green Yellow', '#AAFF55'],
-    ['Heliotrope', '#AA55FF'],
-    ['Hot Pink', '#FF55AA'],
-    ['Texas Rose', '#FFAA55'],
-    ['Emperor', '#555555'],
-    ['Silver Chalice', '#AAAAAA'],
+    ["Malibu 2", "#55AAFF"],
+    ["Heliotrope", "#AA55FF"],
+    ["Aquamarine", "#55FFAA"],
+    ["Green Yellow", "#AAFF55"],
+    ["Heliotrope", "#AA55FF"],
+    ["Hot Pink", "#FF55AA"],
+    ["Texas Rose", "#FFAA55"],
+    ["Emperor", "#555555"],
+    ["Silver Chalice", "#AAAAAA"],
 ]
 
 # colours = [
@@ -209,4 +207,3 @@ colours = [
 #     ['white smoke', '#F5F5F5'],
 #     ['white', '#FFFFFF']
 # ]
-

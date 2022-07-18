@@ -17,4 +17,3 @@ class Line:
         x_length = abs(self.start[0] - self.end[0])
         y_length = abs(self.start[1] - self.end[1])
         return math.sqrt(math.pow(x_length, 2) + math.pow(y_length, 2))
-

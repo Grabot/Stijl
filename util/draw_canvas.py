@@ -35,8 +35,10 @@ def draw_squares(_yertle, _planes, _width, _height, _canvas_lines, draw_everythi
 
             if not draw_everything:
                 ts = _yertle.getscreen()
-                plane_name = 'plane_%s' % plane_index
-                ts.getcanvas().postscript(file="results/%s/%s" % (seed, plane_name + ".eps"))
+                plane_name = "plane_%s" % plane_index
+                ts.getcanvas().postscript(
+                    file="results/%s/%s" % (seed, plane_name + ".eps")
+                )
                 # Write information about the plane to a file
                 f.write(plane_name + ":\n")
                 point_index = 1
@@ -45,8 +47,8 @@ def draw_squares(_yertle, _planes, _width, _height, _canvas_lines, draw_everythi
                     # to have the origin in [width/2, height/2].
                     # This makes the bottom left point [0, 0]
                     # It makes it easier when converting it to the canvas with paint
-                    x_point = "%.2f" % (point[0] + _width/2)
-                    y_point = "%.2f" % (point[1] + _height/2)
+                    x_point = "%.2f" % (point[0] + _width / 2)
+                    y_point = "%.2f" % (point[1] + _height / 2)
 
                     f.write("point_%s:" % point_index)
                     f.write("x: %s " % x_point)
@@ -68,17 +70,17 @@ def line_intersection(line_1, line_2):
     x2, y2 = line_1.end
     x3, y3 = line_2.start
     x4, y4 = line_2.end
-    denom = (y4-y3)*(x2-x1) - (x4-x3)*(y2-y1)
+    denom = (y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1)
     if denom == 0:  # parallel
         return None
-    ua = ((x4-x3)*(y1-y3) - (y4-y3)*(x1-x3)) / denom
+    ua = ((x4 - x3) * (y1 - y3) - (y4 - y3) * (x1 - x3)) / denom
     if ua < 0 or ua > 1:  # out of range
         return None
-    ub = ((x2-x1)*(y1-y3) - (y2-y1)*(x1-x3)) / denom
+    ub = ((x2 - x1) * (y1 - y3) - (y2 - y1) * (x1 - x3)) / denom
     if ub < 0 or ub > 1:  # out of range
         return None
-    x = x1 + ua * (x2-x1)
-    y = y1 + ua * (y2-y1)
+    x = x1 + ua * (x2 - x1)
+    y = y1 + ua * (y2 - y1)
     return x, y
 
 
@@ -90,15 +92,14 @@ def is_inside_canvas(_width, _height, point):
 
 
 def orientation(p, q, r):
-    '''
+    """
     To find orientation of ordered triplet (p, q, r).
     The function returns following values
     0 --> p, q and r are collinear
     1 --> Clockwise
     2 --> Counterclockwise
-    '''
-    val = (q[1] - p[1]) * (r[0] - q[0]) - \
-          (q[0] - p[0]) * (r[1] - q[1])
+    """
+    val = (q[1] - p[1]) * (r[0] - q[0]) - (q[0] - p[0]) * (r[1] - q[1])
 
     if val == 0:
         return 0
@@ -149,21 +150,13 @@ def draw_canvas(_yertle, _width, _height, _planes):
     canvas_top = Line([-_width / 2, _height / 2], [_width / 2, _height / 2])
     canvas_right = Line([_width / 2, _height / 2], [_width / 2, -_height / 2])
     canvas_bottom = Line([_width / 2, -_height / 2], [-_width / 2, -_height / 2])
-    canvas_lines = [
-        canvas_left,
-        canvas_top,
-        canvas_right,
-        canvas_bottom
-    ]
+    canvas_lines = [canvas_left, canvas_top, canvas_right, canvas_bottom]
 
-    _yertle.fillcolor('#FFFFFF')
-    draw_plane(_yertle, [
-        canvas_left.start,
-        canvas_top.start,
-        canvas_right.start,
-        canvas_bottom.start
-    ])
+    _yertle.fillcolor("#FFFFFF")
+    draw_plane(
+        _yertle,
+        [canvas_left.start, canvas_top.start, canvas_right.start, canvas_bottom.start],
+    )
 
     draw_squares(_yertle, _planes, _width, _height, canvas_lines, False)
     draw_squares(_yertle, _planes, _width, _height, canvas_lines, True)
-
