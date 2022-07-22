@@ -31,10 +31,12 @@ if __name__ == "__main__":
             screen.setup(width * 2, width * 2, startx=start_x, starty=start_y)
             screen.setworldcoordinates(-width, -width, width + 5, width + 5)
         else:
-            screen.setup(height * 2, height * 2,
-                         startx=start_x, starty=start_y)
-            screen.setworldcoordinates(-height, -height,
-                                       height + 5, height + 5)
+            screen.setup(
+                height * 2, height * 2, startx=start_x, starty=start_y
+            )
+            screen.setworldcoordinates(
+                -height, -height, height + 5, height + 5
+            )
     else:
         # Screen setup with only canvas
         screen.setup(width, height, startx=start_x, starty=start_y)

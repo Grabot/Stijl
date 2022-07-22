@@ -1,11 +1,11 @@
-import math
-
 from objects.line import Line
 from util.draw_plane import draw_plane
 from util.variables import seed
 
 
-def draw_squares(_yertle, _planes, _width, _height, _canvas_lines, draw_everything):
+def draw_squares(
+    _yertle, _planes, _width, _height, _canvas_lines, draw_everything
+):
     plane_index = 1
     _yertle.hideturtle()
     f = None
@@ -20,7 +20,8 @@ def draw_squares(_yertle, _planes, _width, _height, _canvas_lines, draw_everythi
                     inter_x = intersection[0]
                     inter_y = intersection[1]
                     intersection_points.append([inter_x, inter_y])
-        # We found all the intersection points, now we will find all the points that are within the canvas
+        # We found all the intersection points,
+        # now we will find all the points that are within the canvas
         for square_line in plane.get_all_lines():
             if is_inside_canvas(_width, _height, square_line.start):
                 intersection_points.append(square_line.start)
@@ -43,10 +44,10 @@ def draw_squares(_yertle, _planes, _width, _height, _canvas_lines, draw_everythi
                 f.write(plane_name + ":\n")
                 point_index = 1
                 for point in intersection_points:
-                    # We will convert the points from having the origin in [0, 0]
+                    # We convert the points from having the origin in [0, 0]
                     # to have the origin in [width/2, height/2].
                     # This makes the bottom left point [0, 0]
-                    # It makes it easier when converting it to the canvas with paint
+                    # It makes it easier when converting it to the canvas
                     x_point = "%.2f" % (point[0] + _width / 2)
                     y_point = "%.2f" % (point[1] + _height / 2)
 
@@ -61,7 +62,9 @@ def draw_squares(_yertle, _planes, _width, _height, _canvas_lines, draw_everythi
         f.close()
     else:
         ts = _yertle.getscreen()
-        ts.getcanvas().postscript(file="results/%s/%s" % (seed, "final_image.eps"))
+        ts.getcanvas().postscript(
+            file="results/%s/%s" % (seed, "final_image.eps")
+        )
 
 
 def line_intersection(line_1, line_2):
@@ -145,17 +148,24 @@ def draw_canvas(_yertle, _width, _height, _planes):
     # First clear the canvas and start over (debug purpose)
     _yertle.clear()
     _yertle.hideturtle()
-    # We will use the canvas line segments to identify where they intersect with the planes
+    # Use the canvas lines to identify where they intersect with the planes
     canvas_left = Line([-_width / 2, -_height / 2], [-_width / 2, _height / 2])
     canvas_top = Line([-_width / 2, _height / 2], [_width / 2, _height / 2])
     canvas_right = Line([_width / 2, _height / 2], [_width / 2, -_height / 2])
-    canvas_bottom = Line([_width / 2, -_height / 2], [-_width / 2, -_height / 2])
+    canvas_bottom = Line(
+        [_width / 2, -_height / 2], [-_width / 2, -_height / 2]
+    )
     canvas_lines = [canvas_left, canvas_top, canvas_right, canvas_bottom]
 
     _yertle.fillcolor("#FFFFFF")
     draw_plane(
         _yertle,
-        [canvas_left.start, canvas_top.start, canvas_right.start, canvas_bottom.start],
+        [
+            canvas_left.start,
+            canvas_top.start,
+            canvas_right.start,
+            canvas_bottom.start,
+        ],
     )
 
     draw_squares(_yertle, _planes, _width, _height, canvas_lines, False)

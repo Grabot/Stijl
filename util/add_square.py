@@ -26,7 +26,8 @@ def angle_slopes(slope_1, slope_2):
         divisor = 0.00001
     ang_rad = math.atan((slope_2 - slope_1) / divisor)
     ang = math.degrees(ang_rad)
-    # We know we have a convex quadrilateral so all angles are positive and between 0 and 180
+    # We know we have a convex quadrilateral
+    # so all angles are positive and between 0 and 180
     if ang > 180:
         return ang - 180
     elif ang < -180:
@@ -90,12 +91,13 @@ def add_square(_yertle, _rand, _width, _height, _planes, _index):
         line_choice -= _index
         _index += 1
         line = plane.get_line(line_choice)
-        # It's possible that a line is shorter than the minimum length because of the angles, don't pick these
+        # It's possible that a line is shorter
+        # than the minimum length because of the angles, don't pick these
         if line.get_length() <= min_line_length:
             continue
         next_line = line.get_next()
-        # We are going to split the chosen line somewhere
-        # and attempt to calculate the new resulting plane split using the chosen angle
+        # We are going to split the chosen line somewhere and attempt to
+        # calculate the new resulting plane split using the chosen angle
         line_length_choice = _rand.uniform(
             _index + min_line_length, line.get_length() + _index
         )
@@ -121,7 +123,6 @@ def add_square(_yertle, _rand, _width, _height, _planes, _index):
         opp = math.sin(math.radians(angle_1)) * line_length_choice
         adj = math.sqrt(math.pow(line_length_choice, 2) - math.pow(opp, 2))
 
-        # TODO: - or + adj do tests!
         test_point_a_2 = [test_point_a_1[0] + adj, test_point_a_1[1] + opp]
         if not point_on_line(line, test_point_a_2):
             test_point_a_2 = [test_point_a_1[0] - adj, test_point_a_1[1] + opp]
@@ -144,7 +145,7 @@ def add_square(_yertle, _rand, _width, _height, _planes, _index):
         ang_3 = get_angle_lines(next_line, next_line.get_next())
         ang_4 = 360 - ang_1 - ang_2 - ang_3
 
-        triangle_1_line_1 = Line(test_point_b_1, next_line.start)
+        # triangle_1_line_1 = Line(test_point_b_1, next_line.start)
         triangle_1_line_2 = Line(next_line.start, next_line.end)
         triangle_1_line_3 = Line(next_line.end, test_point_b_1)
 
@@ -160,18 +161,22 @@ def add_square(_yertle, _rand, _width, _height, _planes, _index):
         _yertle.goto(next_line.end[0], next_line.end[1])
         _yertle.pendown()
 
-        triangle_1_ang_1 = get_angle_lines(triangle_1_line_3, triangle_1_line_1)
-        triangle_1_ang_2 = get_angle_lines(triangle_1_line_1, triangle_1_line_2)
-        triangle_1_ang_3 = get_angle_lines(triangle_1_line_2, triangle_1_line_3)
+        # triangle_1_ang_1 = get_angle_lines(
+        #     triangle_1_line_3, triangle_1_line_1)
+        # triangle_1_ang_2 = get_angle_lines(
+        #     triangle_1_line_1, triangle_1_line_2)
+        triangle_1_ang_3 = get_angle_lines(
+            triangle_1_line_2, triangle_1_line_3
+        )
 
         t2_ang_1 = ang_3 - triangle_1_ang_3
         t2_ang_2 = ang_4
         t2_ang_3 = 180 - t2_ang_1 - t2_ang_2
 
         t2_mid = Line(next_line.end, test_point_b_1).get_length()
-        t2_center = (t2_mid * math.sin(math.radians(t2_ang_1))) / math.sin(
-            math.radians(t2_ang_2)
-        )
+        # t2_center = (t2_mid * math.sin(math.radians(t2_ang_1))) / math.sin(
+        #     math.radians(t2_ang_2)
+        # )
         t2_side = (t2_mid * math.sin(math.radians(t2_ang_3))) / math.sin(
             math.radians(t2_ang_2)
         )
@@ -181,7 +186,8 @@ def add_square(_yertle, _rand, _width, _height, _planes, _index):
         change_line = next_line.get_next()
         angle_c_1 = math.degrees(
             math.asin(
-                (change_line.end[1] - change_line.start[1]) / change_line.get_length()
+                (change_line.end[1] - change_line.start[1])
+                / change_line.get_length()
             )
         )
 
@@ -200,10 +206,9 @@ def add_square(_yertle, _rand, _width, _height, _planes, _index):
         if not point_on_line(change_line, test_point_c_2):
             test_point_c_2 = [test_point_c_1[0] - adj, test_point_c_1[1] - opp]
         if not point_on_line(change_line, test_point_c_2):
-            # For now we will just assume that the point is out of bounds by angle choice
             continue
 
-        # Check if the other point is actually inside the plane where you want to put it.
+        # Check if the other point is in the plane where you want to put it.
         # If this is not the case we do not draw this and try again
         if not point_on_plane(plane, test_point_c_2):
             # The point is not in the plane so try again!
@@ -225,7 +230,8 @@ def add_square(_yertle, _rand, _width, _height, _planes, _index):
             change_line.end,
         ]
 
-        # Not sure why the min line length wasn't captured before but this seems to work too.
+        # Check all the lines to see if they are long enough
+        # If one or more and too short we don't draw this plane
         length_1 = get_length(new_plane_1_points[0], new_plane_1_points[1])
         length_2 = get_length(new_plane_1_points[1], new_plane_1_points[2])
         length_3 = get_length(new_plane_1_points[2], new_plane_1_points[3])
@@ -248,12 +254,13 @@ def add_square(_yertle, _rand, _width, _height, _planes, _index):
         plane_1 = Plane(new_plane_1_points, colours[colour_index][1])
         plane_2 = Plane(new_plane_2_points, plane.get_colour())
 
-        # Check if all the new angles are NOT nice, so not 90
+        # Check if all the new angles are NOT nice, so not 90.
+        # unless you specifically wanted 90 angles
         # Damn floating points :(
-        if abs(angle_c_1 - 90) < 0.001:
+        if abs(angle_c_1 - 90) < 0.001 and 90 not in angles:
             continue
 
-        # If everything about this new plane is validated, we will finally draw it!
+        # If everything about this new plane is validated, we draw it!
         # First the 2 triangles, mainly for tests and debugging
         draw_plane(_yertle, triangle_1_points)
         draw_plane(_yertle, triangle_2_points)
@@ -261,7 +268,8 @@ def add_square(_yertle, _rand, _width, _height, _planes, _index):
         # Now draw the new plane!
         draw_plane(_yertle, new_plane_1_points)
 
-        # We don't draw the second plane because the plane below it will be the colour of this new plane.
+        # We don't draw the second plane
+        # because the plane below it will be the colour of this new plane.
         # draw_plane(_yertle, new_plane_2_points)
 
         return plane_1, plane_2, plane_choice
