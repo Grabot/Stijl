@@ -30,7 +30,7 @@ python stijl.py --seed="The Stijl" --width=800 --height=600 --min_squares=0 --ma
 ![The Stijl gif example](example_images/example_gif.gif)
 The values given as arguments are also the default values. So the same result is given by just running `stijl.py`
 
-You can also pass a list of angles as numbers. These are used to create the angles of the planes. By setting these to be just nog 90 degrees you'll create almost square looking planes but they would seem slightly off and crooked. The default of these values are `"88, 89, 91, 92"`.
+You can also pass a list of angles as numbers. These are used to create the angles of the planes. By setting these to be just not 90 degrees you'll create almost square looking planes but they would seem slightly off and crooked. The default of these values are `"88, 89, 91, 92"`.
 As an example, the following image is created using the command:
 ```commandline
 python stijl.py --angles="69, 31, 72"
