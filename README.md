@@ -57,4 +57,6 @@ colours = ["#8dd3c7", "#ffffb3", "#bebada", "#fb8072", "#80b1d3", "#fdb462", "#b
 This colouring scheme (chosen using https://colorbrewer2.org) can produce the following result:
 ![The Stijl image colouring_example](example_images/example_colouring.png)
 
-Whenever 
+Whenever you execute the application using a seed it will create a 'result' folder where the application is located. In this folder it will create a another folder of the chosen seed and within that folder it will have the final image that was created in eps file format with an image for every separate plane. 
+
+There will also be a `plane_info.txt` file in this folder. In this file it will list all the coordinates points of the planes in the final images within your chosen canvas width and height, [0, 0] being the bottom left and [width, height] top right, with the colour in hex format. The plane indexing in this file will be the same as the images in the folder. This information can be used to easily transfer the artwork to an actual canvas using actual paint.
