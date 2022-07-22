@@ -29,12 +29,12 @@ def background_square(_yertle, _rand, _width, _height, _index):
 
     colour_index = _rand.randint(_index, len(colours) + _index)
     colour_index -= _index
-    _yertle.fillcolor(colours[colour_index][1])
+    _yertle.fillcolor(colours[colour_index])
     print("colour_index: %s" % colour_index)
     _index += 1
 
     background_points = [left_point, top_point, right_point, bottom_point]
-    background_plane = Plane(background_points, colours[colour_index][1])
+    background_plane = Plane(background_points, colours[colour_index])
     _yertle.penup()
     _yertle.goto(left_point[0], left_point[1])
     _yertle.pendown()
@@ -47,42 +47,6 @@ def background_square(_yertle, _rand, _width, _height, _index):
     _yertle.end_fill()
 
     return background_plane
-
-    # colour_index = _rand.randint(_index, len(colours) + _index)
-    # colour_index -= _index
-    # _index += 1
-    # _yertle.fillcolor(colours[colour_index][1])
-    # This is the final canvas size
-    # left_bottom = [-(_width/2), -(_height/2)]
-    # right_bottom = [(_width/2), -(_height/2)]
-    # right_top = [(_width/2), (_height/2)]
-    # left_top = [-(_width/2), (_height/2)]
-    # plane_points = [
-    #     [-(_width/2), -(_height/2)],
-    #     [(_width/2), -(_height/2)],
-    #     [(_width/2), (_height/2)],
-    #     [-(_width/2), (_height/2)]]
-    # background_plane = Plane(plane_points)
-    # line1 = Line(left_bottom, right_bottom)
-    # line2 = Line(right_bottom, right_top)
-    # line3 = Line(right_top, left_top)
-    # line4 = Line(left_top, left_bottom)
-    #
-    # _yertle.penup()
-    # _yertle.goto(line1.start[0], line1.start[1])
-    # _yertle.pendown()
-    #
-    # _yertle.begin_fill()
-    # _yertle.goto(line1.end[0], line1.end[1])
-    # _yertle.goto(line2.end[0], line2.end[1])
-    # _yertle.goto(line3.end[0], line3.end[1])
-    # _yertle.goto(line4.end[0], line4.end[1])
-    # _yertle.end_fill()
-    #
-    # # go to [0.0, 0.0]
-    # _yertle.penup()
-    # _yertle.goto(line1.start[0], line1.start[1])
-    # _yertle.pendown()
 
 
 def hide_canvas_sides(_yertle, _width, _height):

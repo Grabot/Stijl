@@ -1,13 +1,29 @@
 
-# tertiary colours from a colour mixing tool
+# tertiary colours from a colour mixing tool https://trycolors.com/
 colours = [
-    ["Malibu 2", "#55AAFF"],
-    ["Heliotrope", "#AA55FF"],
-    ["Aquamarine", "#55FFAA"],
-    ["Green Yellow", "#AAFF55"],
-    ["Heliotrope", "#AA55FF"],
-    ["Hot Pink", "#FF55AA"],
-    ["Texas Rose", "#FFAA55"],
-    ["Emperor", "#555555"],
-    ["Silver Chalice", "#AAAAAA"],
+    "#55AAFF",
+    "#AA55FF",
+    "#55FFAA",
+    "#AAFF55",
+    "#AA55FF",
+    "#FF55AA",
+    "#FFAA55",
+    "#555555",
+    "#AAAAAA",
+]
+
+# Qualitative colour scheme selected from https://colorbrewer2.org
+colours = [
+    "#8dd3c7",
+    "#ffffb3",
+    "#bebada",
+    "#fb8072",
+    "#80b1d3",
+    "#fdb462",
+    "#b3de69",
+    "#fccde5",
+    "#d9d9d9",
+    "#bc80bd",
+    "#ccebc5",
+    "#ffed6f",
 ]

@@ -6,7 +6,7 @@ Software that creates a canvas with colourful planes which is inspired by De Sti
 Where De Stijl had right angles and bright primary colours however this software will make all angles slightly malformed. The angles will be 88, 89, 91 or 92 degrees instead of the straight 90 degree angles. Also, the colouring will not be the primary colours but the tertiary colour scheme. The resulting canvas will be a collection of planes that are all slightly crooked and coloured with the tertiary colouring schemes.
 
 An example is shown below. 
-![The Stijl image example](example.png)
+![The Stijl image example](example_images/example_regular.png)
 
 The algorithm works by drawing a large square at a 45-degree angle behind the canvas. It will then execute the following steps   
 - Pick one of the plane currently available in the square (in the beginning this is 1). 
@@ -25,21 +25,36 @@ These steps are executed based on the amount of planes it should draw. This valu
 
 An example of the algorithm is show in the gif below. This is created using the command:
 ```commandline
-python stijl.py --seed="The Stijl" --width=800 --height=800 --min_squares=0 --max_squares=20 --view_algorithm=True
+python stijl.py --seed="The Stijl" --width=800 --height=600 --min_squares=0 --max_squares=20 --view_algorithm=True
 ```
-![The Stijl gif example](Stijl.gif)
+![The Stijl gif example](example_images/example_gif.gif)
+The values given as arguments are also the default values. So the same result is given by just running `stijl.py`
 
+You can also pass a list of angles as numbers. These are used to create the angles of the planes. By setting these to be just nog 90 degrees you'll create almost square looking planes but they would seem slightly off and crooked. The default of these values are `"88, 89, 91, 92"`.
+As an example, the following image is created using the command:
+```commandline
+python stijl.py --angles="69, 31, 72"
+```
+![The Stijl image angle_example](example_images/example_angles.png)
 
+The colouring scheme is chosen to be the tertiary colours using paint. So it uses the CYMK colouring. The reason that the tertiary is default and not secondary is because the secondary colours of the CYMK model are basically the primary colours of the RGB computer monitors colour scheme and it would not give many options. The tertiary colours are all the colours with a 2:1 ratio of the primary colours (cyan, magenta and yellow).
 
---seed SEED           The seed of the artwork (default 'The Stijl')
-  --width WIDTH         The width of the canvas (default: 800)
-  --height HEIGHT       The width of the canvas (default: 600)
-  --min_squares MIN_SQUARES
-                        It will draw a random amount of squares based on the seed between `min_squares` and
-                        `max_squares`. The `min_squares` is the minimal amount of squares (default:0)
-  --max_squares MAX_SQUARES
-                        It will draw a random amount of squares based on the seed between `min_squares` and
-                        `max_squares`. The `max_squares` is the maximum amount of squares (default:20)
-  --view_algorithm VIEW_ALGORITHM
-                        If True the canvas will expand and you can see the algorithm perform it's steps. If set to
-                        False the algorithm will finish as quick as possible and store images of the final canvas
+Including a light and dark grey this gives the following options:
+- Malibu 2: #55AAFF
+- Heliotrope: #AA55FF
+- Aquamarine: #55FFAA
+- Green Yellow: #AAFF55
+- Heliotrope: #AA55FF
+- Hot Pink: #FF55AA
+- Texas Rose: #FFAA55
+- Emperor: #555555
+- Silver Chalice: #AAAAAA
+
+These hex options are defined in the `colours` variable found in `util/colours.py`. If you want to change the colouring scheme that the software will choose from you can change this variable to include hex strings of your own chosen colouring scheme. For instance, we can change the variable to the following:
+```
+colours = ["#8dd3c7", "#ffffb3", "#bebada", "#fb8072", "#80b1d3", "#fdb462", "#b3de69", "#fccde5", "#d9d9d9", "#bc80bd", "#ccebc5", "#ffed6f",]
+```
+This colouring scheme (chosen using https://colorbrewer2.org) can produce the following result:
+![The Stijl image colouring_example](example_images/example_colouring.png)
+
+Whenever 

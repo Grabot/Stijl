@@ -78,7 +78,7 @@ def add_square(_yertle, _rand, _width, _height, _planes, _index):
     while True:
         colour_index = _rand.randint(_index, len(colours) - 1 + _index)
         colour_index -= _index
-        _yertle.fillcolor(colours[colour_index][1])
+        _yertle.fillcolor(colours[colour_index])
         _index += 1
 
         plane_choice = _rand.randint(_index, len(_planes) - 1 + _index)
@@ -251,7 +251,7 @@ def add_square(_yertle, _rand, _width, _height, _planes, _index):
             or length_8 <= min_line_length
         ):
             continue
-        plane_1 = Plane(new_plane_1_points, colours[colour_index][1])
+        plane_1 = Plane(new_plane_1_points, colours[colour_index])
         plane_2 = Plane(new_plane_2_points, plane.get_colour())
 
         # Check if all the new angles are NOT nice, so not 90.
