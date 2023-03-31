@@ -3,7 +3,39 @@ import math
 from objects.plane import Plane
 from util.colours import colours
 from util.draw_plane import draw_plane
+from util.variables import show_lines
 
+
+def background_square_clean(_rand, _width, _height, _index):
+    # We will draw a larger square on it's side. The points of the square are:
+    # [-width/2, -height/2]
+    # [width/2, -height/2]
+    # [width/2, height/2]
+    # [-width/2, height/2]
+    # The square behind this square on it side will have the following points:
+    side_triangle = _height / math.sqrt(2)
+    point_a = math.pow(side_triangle, 2) - math.pow(_height / 2, 2)
+    point_a = math.sqrt(point_a)
+    point_a = -(_width / 2) - point_a
+    left_point = [point_a, 0]
+    point_c = point_a * -1
+    right_point = [point_c, 0]
+    side_triangle_2 = _width / math.sqrt(2)
+    point_b = math.pow(side_triangle_2, 2) - math.pow(_width / 2, 2)
+    point_b = math.sqrt(point_b)
+    point_b = -(_height / 2) - point_b
+    bottom_point = [0, point_b]
+    point_d = point_b * -1
+    top_point = [0, point_d]
+
+    colour_index = _rand.randint(_index, len(colours) + _index)
+    colour_index -= _index
+    _index += 1
+
+    background_points = [left_point, top_point, right_point, bottom_point]
+    background_plane = Plane(background_points, colours[colour_index])
+
+    return background_plane
 
 def background_square(_yertle, _rand, _width, _height, _index):
     # We will draw a larger square on it's side. The points of the square are:
@@ -37,6 +69,8 @@ def background_square(_yertle, _rand, _width, _height, _index):
     background_plane = Plane(background_points, colours[colour_index])
     _yertle.penup()
     _yertle.goto(left_point[0], left_point[1])
+    if not show_lines:
+        _yertle.color(colours[colour_index])
     _yertle.pendown()
 
     _yertle.begin_fill()

@@ -2,9 +2,12 @@ import turtle
 from turtle import Screen
 import random
 import os
+
+from objects.line import Line
 from util.add_square import add_square
 from util.background_square import background_square
-from util.draw_canvas import draw_canvas
+from util.draw_canvas import draw_canvas, draw_squares
+from util.draw_plane import draw_plane
 from util.variables import (
     width,
     height,
@@ -41,8 +44,10 @@ if __name__ == "__main__":
         # Screen setup with only canvas
         screen.setup(width, height, startx=start_x, starty=start_y)
         screen.setworldcoordinates(
-            -width / 2, -height / 2, width / 2 + 5, height / 2 + 5
+            -width / 2, -height / 2, width / 2, height / 2
         )
+        # This turns screen updates off
+        screen.tracer(0)
 
     yertle.speed(turtle_speed)
     planes = []

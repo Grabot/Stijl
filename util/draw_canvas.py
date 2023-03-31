@@ -1,6 +1,6 @@
 from objects.line import Line
 from util.draw_plane import draw_plane
-from util.variables import seed
+from util.variables import seed, show_lines
 
 
 def draw_squares(
@@ -32,6 +32,8 @@ def draw_squares(
                 _yertle.hideturtle()
             sorted_points = convex_hull(intersection_points)
             _yertle.fillcolor(plane.get_colour())
+            if not show_lines:
+                _yertle.color(plane.get_colour())
             draw_plane(_yertle, sorted_points)
 
             if not draw_everything:

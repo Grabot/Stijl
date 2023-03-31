@@ -46,6 +46,11 @@ parser.add_argument(
     default=[88, 89, 91, 92],
     help="Indicate what angles can be created. Here you can specify how crooked or how straight the created planes should be by specifying the possible corner angles. (default: 88,89,91,91)",
 )
+parser.add_argument(
+    "--show_lines",
+    default=True,
+    help="If True the image will have black outlines around the area's.",
+)
 args = parser.parse_args()
 
 width = int(args.width)
@@ -65,6 +70,10 @@ seed = args.seed
 view_algorithm = True
 if args.view_algorithm == "False":
     view_algorithm = False
+
+show_lines = True
+if args.show_lines == "False":
+    show_lines = False
 
 turtle_speed = 5
 if not view_algorithm:
