@@ -23,10 +23,6 @@ def stijl_instant():
     index += 1
     planes.append(background_plane)
 
-    points = []
-    for line in background_plane.get_all_lines():
-        points.append((line.start[0] + width, line.start[1] + height))
-
     square_numbers = random.randint(min_squares, max_squares)
 
     for x in range(0, square_numbers):
