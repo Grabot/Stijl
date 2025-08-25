@@ -241,18 +241,18 @@ def add_square(_yertle, _rand, _width, _height, _planes, _index):
 
     while True:
         colour_index = _rand.randint(_index, len(colours) - 1 + _index)
-        colour_index -= _index
+        colour_index -= (_index + 1)
         _yertle.fillcolor(colours[colour_index])
         _index += 1
 
         plane_choice = _rand.randint(_index, len(_planes) - 1 + _index)
-        plane_choice -= _index
+        plane_choice -= (_index + 1)
         _index += 1
         # This is the square that we will want to divide in 2 squares!
         plane = _planes[plane_choice]
 
         line_choice = _rand.randint(_index, 3 + _index)
-        line_choice -= _index
+        line_choice -= (_index + 1)
         _index += 1
         line = plane.get_line(line_choice)
         # It's possible that a line is shorter
@@ -265,12 +265,11 @@ def add_square(_yertle, _rand, _width, _height, _planes, _index):
         line_length_choice = _rand.uniform(
             _index + min_line_length, line.get_length() + _index
         )
-        line_length_choice -= _index
+        line_length_choice -= (_index + 1)
         _index += 1
 
         angle_choice = _rand.randint(_index, len(angles) + _index)
-        angle_choice -= _index
-        angle_choice -= 1
+        angle_choice -= (_index + 1)
         _index += 1
 
         ang_1 = angles[angle_choice]

@@ -28,7 +28,7 @@ def background_square_clean(_rand, _width, _height, _index):
     point_d = point_b * -1
     top_point = [0, point_d]
 
-    colour_index = _rand.randint(_index, len(colours) + _index)
+    colour_index = _rand.randint(_index, len(colours)-1 + _index)
     colour_index -= _index
     _index += 1
 
